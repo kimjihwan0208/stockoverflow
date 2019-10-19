@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color:rgb(242, 247, 255);
+  height: 100vh;
 }
 
 .App-logo {
@@ -19,4 +21,16 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.App__stockTitle, .App__listTitle, .App__newsTitle {
+  font-family: "Ubuntu", sans-serif;
+  text-align: left;
+  margin-left: 2%;
+  font-weight: bold;
+  font-size: 200%;
+}
+
+.App__newsTitle {
+  margin-top: 2%;
 }
