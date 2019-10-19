@@ -1,0 +1,10 @@
+.item__container {
+  border-radius: 15px;
+  padding: 14px 0;
+  margin-top: 10px;
+}
+
+.item__value {
+  font-family: "Ubuntu", sans-serif;
+  color: #FFFFFF;
+}

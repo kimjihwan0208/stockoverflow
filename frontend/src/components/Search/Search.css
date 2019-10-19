@@ -15,4 +15,6 @@
 .search__submit {
   border-radius: 15px;
   font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px #4963EF;
 }
