@@ -4,12 +4,14 @@ import Search from './components/Search/Search';
 import Graph from './components/Graph/Graph';
 import List from './components/List/List';
 import News from './components/News/News';
+import logo from './assets/logo.svg';
 
 function App() {
   return (
     <div className="App">
       <div className="container-fluid">
         <div className="row justify-content-center">
+          <img src={logo} alt="" className="App__logo"/>
           <Search />
         </div>
         <div className="row justify-content-center">

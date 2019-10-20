@@ -3,4 +3,25 @@
   background-color: white;
   border-radius: 30px;
   box-shadow: 0px 0px 35px rgba(69, 96, 136, 0.07);
+  padding-top: 10px;
+}
+
+.article__title {
+  text-align: left;
+  font-family: "Ubuntu", sans-serif;
+  color: #4963EF;
+  font-weight: bold;
+  font-size: 100%;
+}
+
+.article__description {
+  text-align: left;
+  width: 75%;
+  margin-top: 4px;
+  font-family: "Ubuntu", sans-serif
+}
+
+.article__sentiment {
+  font-weight: bold;
+  font-family: "Ubuntu", sans-serif;
 }

@@ -4,8 +4,10 @@
   height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
+.App__logo {
+  margin-right: 25px;
+  margin-top: 12px;
+  width: 8%;
 }
 
 .App-header {
