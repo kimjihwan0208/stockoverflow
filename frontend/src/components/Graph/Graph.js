@@ -28,49 +28,51 @@ const datasets = {
   }]
 }
 
+const setOptions = {
+  responsive: true,
+  scales: {
+    xAxes: [{
+      offset: true,
+      type: 'time',
+      gridLines: {
+        display: false
+      },
+      time:
+        {
+          stepSize: 1,
+          unit: 'hour',
+          format: 'HH:mm',
+          parser: 'HH:mm',
+          min: '6:30',
+          max: '13:00',
+          displayFormats: { hour: 'HH:mm' }
+        }
+    }],
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      },
+      gridLines: {
+        display: false
+      }
+    }]
+  },
+  maintainAspectRatio: false,
+  title:{
+    display: false
+  },
+  legend:{
+    display: false,
+  }
+}
+
 function Graph() {
   return (
     <div className="graph__container">
       <div className="graph__innerContainer">
         <Line
           data={datasets}
-          options={{
-            responsive: true,
-            scales: {
-              xAxes: [{
-                offset: true,
-                type: 'time',
-                gridLines: {
-                  display: false
-                },
-                time:
-                  {
-                    stepSize: 1,
-                    unit: 'hour',
-                    format: 'HH:mm',
-                    parser: 'HH:mm',
-                    min: '6:30',
-                    max: '13:00',
-                    displayFormats: { hour: 'HH:mm' }
-                  }
-              }],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                },
-                gridLines: {
-                  display: false
-                }
-              }]
-            },
-            maintainAspectRatio: false,
-            title:{
-              display: false
-            },
-            legend:{
-              display: false,
-            }
-          }}
+          options={setOptions}
         />
       </div>
     </div>
