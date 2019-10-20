@@ -46,7 +46,7 @@ function Search() {
                 type="primary"
                 htmlType="submit"
               >
-                Search
+                SEARCH
               </Button>
             </Item>
           </Form>
