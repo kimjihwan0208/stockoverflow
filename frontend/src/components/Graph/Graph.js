@@ -25,6 +25,8 @@ const datasets = {
   ],
   backgroundColor:'#F4F8FE',
   borderColor: '#4963EF',
+  pointRadius: 5,
+  pointHoverRadius: 6,
   }]
 }
 
