@@ -39,6 +39,9 @@ const setOptions = {
       gridLines: {
         display: false
       },
+      ticks: {
+        fontFamily: "'Ubuntu', sans-serif"
+      },
       time:
         {
           stepSize: 1,
@@ -52,7 +55,8 @@ const setOptions = {
     }],
     yAxes: [{
       ticks: {
-        beginAtZero: true
+        beginAtZero: true,
+        fontFamily: "'Ubuntu', sans-serif"
       },
       gridLines: {
         display: false
@@ -64,6 +68,9 @@ const setOptions = {
     display: false
   },
   legend:{
+    labels: {
+      defaultFontFamily: "'Ubuntu', sans-serif"
+    },
     display: false,
   }
 }

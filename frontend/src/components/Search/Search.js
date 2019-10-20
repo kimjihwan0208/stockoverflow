@@ -6,9 +6,12 @@ const { Item } = Form;
 
 function Search() {
   const [date, setDate] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     console.log("Got stock symbol", e.target.stockSymbol.value)
   }
@@ -37,7 +40,7 @@ function Search() {
               <DatePicker
                 onChange={handleDateChange}
                 format="MM/DD/YYYY"
-                style={{ width: 250 }}
+                style={{ width: 200 }}
               />
             </Item>
             <Item>
@@ -45,6 +48,7 @@ function Search() {
                 className="search__submit"
                 type="primary"
                 htmlType="submit"
+                loading={isLoading}
               >
                 SEARCH
               </Button>

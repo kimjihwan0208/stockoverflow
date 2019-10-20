@@ -18,6 +18,7 @@
   letter-spacing: 4px;
   font-weight: bold;
   font-size: 80%;
+  padding-right: 12px;
 }
 
 .search__submit:hover {
