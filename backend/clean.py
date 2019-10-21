@@ -57,7 +57,7 @@ def readContent(relPath):
         return
     files = os.listdir(relPath)
     articles = []
-    for file in files:
+    for f in files:
         if(f.find('.tar') > -1 or f.find('.DS') > -1):
             continue
         pwf = open(relPath + '/' + f, 'r')
@@ -213,15 +213,18 @@ def readContent(relPath):
 
                     close_one_day_pct = get_percentage_change(close_yesterday,close)
                     open_one_day_pct = get_percentage_change(open_yesterday, open_)
-                    tfidf = tfidf_vectorizer_vectors[fileNum]
+                    vector_tfidfvectorizer = tfidf_vectorizer_vectors[fileNum]
+                    df = pd.DataFrame(vector_tfidfvectorizer.T.todense(), index=tfidf_vectorizer.get_feature_names(), columns=["tfidf"])
+                    df.sort_values(by=["tfidf"],ascending=False)
+                    print(df)
 
 
-    fileNum = fileNum + 1
 
         if count == 30:
             break
 
         count += 1
+        fileNum = fileNum + 1
 
 files = os.listdir(path)
 count = 0
