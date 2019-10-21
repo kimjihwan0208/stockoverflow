@@ -3,7 +3,7 @@
   padding-bottom: 1%;
 }
 
-.ant-input {
+.ant-input, .ant-select-selection {
   border: none;
   outline: none;
   border-radius: 4px;
