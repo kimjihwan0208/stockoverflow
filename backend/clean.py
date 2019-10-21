@@ -13,6 +13,25 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import stop_words
 import re
 
+'''@adi
+from sklearn.decomposition import PCA
+pca = PCA(n_components=15, svd_solver='full')
+pcs = pca.transform(returnsClosePrevRaw1)
+# the market return is the first PC
+mkt_return = pcs[:,0].reshape(num_days,1)
+
+# the betas of each stock to the market return are in
+# the first column of the components
+mkt_beta = pca.components_[0,:].reshape(num_stocks,1)
+
+# the market portion of returns is the projection of one onto the other
+mkt_portion = mkt_beta.dot(mkt_return.T).T
+
+# ...and the residual is just the difference
+residual = returnsClosePrevRaw1 - mkt_portion
+
+residual is returnsPrevCloseMktres
+'''
 
 tfidf_vectorizer=TfidfVectorizer(stop_words=stop_words.ENGLISH_STOP_WORDS, use_idf=True,token_pattern=r'(?u)\b[A-Za-z]+\b')
 
