@@ -12,6 +12,7 @@ import yfinance as yf
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import stop_words
 import re
+from pymongo import MongoClient
 
 '''@adi
 from sklearn.decomposition import PCA
@@ -19,21 +20,21 @@ pca = PCA(n_components=15, svd_solver='full')
 pcs = pca.transform(returnsClosePrevRaw1)
 # the market return is the first PC
 mkt_return = pcs[:,0].reshape(num_days,1)
-
 # the betas of each stock to the market return are in
 # the first column of the components
 mkt_beta = pca.components_[0,:].reshape(num_stocks,1)
-
 # the market portion of returns is the projection of one onto the other
 mkt_portion = mkt_beta.dot(mkt_return.T).T
-
 # ...and the residual is just the difference
 residual = returnsClosePrevRaw1 - mkt_portion
-
 residual is returnsPrevCloseMktres
 '''
+cluster = MongoClient("")
 
-tfidf_vectorizer=TfidfVectorizer(stop_words=stop_words.ENGLISH_STOP_WORDS, use_idf=True,token_pattern=r'(?u)\b[A-Za-z]+\b')
+db = cluster["test"]
+collection = db["test"]
+
+tfidf_vectorizer=TfidfVectorizer(stop_words=stop_words.ENGLISH_STOP_WORDS, use_idf=True,token_pattern=r'(?u)\b[A-Za-z]{2,}\b')
 
 yf.pdr_override()
 
@@ -107,8 +108,8 @@ def readContent(relPath):
         col2 = lines[2][3: lines[2].find('\n')].replace(',', '') # date
         col2 = col2[4:-4]
         col2 = datetime.strptime(col2, '%b %d %Y %I:%M%p')
-        print(col2)
-        print(lines[2])
+        # print(col2)
+        # print(lines[2])
         col3 = lines[0][3: lines[0].find('\n')].replace(',', '') # title
 
         # news_summary = lines[7]
@@ -126,8 +127,13 @@ def readContent(relPath):
         for i in range(7, 7 + limit):
             data = data + str(lines[i].replace('\n', ' '))
 
-        # print(data)
 
+        # for i in range(0,len(lines)):
+        #     print(i)
+        #     print(lines[i])
+
+        # print(data)
+        
         #1. Get the companies
         response = natural_language_understanding.analyze(
         text=data,
@@ -139,10 +145,11 @@ def readContent(relPath):
 
         # print(data)
         entities = response['entities']
+        
         # print(entities)
         # print(len(entities))
         # print(type(entities))
-        print(col2)
+        # print(col2)
         companies = []
         documents = []
         for entity in entities:
@@ -156,12 +163,12 @@ def readContent(relPath):
         print(companies)
         for company in companies:
              stock_symbol = requests.get("http://d.yimg.com/aq/autoc?query=" + company["text"] +  "&region=US&lang=en-US").json()
-             
-             
-             
+             sentiment = company['sentiment']
+            #  print(sentiment)
+            #  print(type(sentiment))
              if stock_symbol['ResultSet']['Result']:
                 stock_symbol = stock_symbol['ResultSet']['Result'][0]['symbol']
-                print(stock_symbol)
+                # print(stock_symbol)
                 start_date = end_date = col2.strftime('%m/%d/%Y')
                 start_datetime = col2
                 
@@ -194,42 +201,80 @@ def readContent(relPath):
                 except KeyError:
                     pass
 
-                if yesterday_stock_data is not None:
+                if yesterday_stock_data is not None and ten_days_stock_data is not None:
                     yest_stock_dict = yesterday_stock_data.to_dict()
+                    yest_stock_list = yesterday_stock_data.values.tolist()
                     ten_days_list = ten_days_stock_data.values.tolist()
 
-                    open_ = yest_stock_dict["Open"][pd.Timestamp(datetime.combine(start_datetime, datetime.min.time()))]
-                    close = yest_stock_dict["Close"][pd.Timestamp(datetime.combine(start_datetime, datetime.min.time()))]
-                    volume = yest_stock_dict["Volume"][pd.Timestamp(datetime.combine(start_datetime, datetime.min.time()))]
+                    if company["text"] == "Hulu": 
+                        print(company["text"])
+                        print(yest_stock_dict)
+                        print(yest_stock_list)
+                        print(ten_days_list)
+                        pass
 
 
-                    open_yesterday = yest_stock_dict["Open"][pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time()))]
-                    close_yesterday = yest_stock_dict["Close"][pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time()))]
-                    volume_yesterday = yest_stock_dict["Volume"][pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time()))]
 
-                    open_tomorrow = yest_stock_dict["Open"][pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time()))]
-                    close_tomorrow = yest_stock_dict["Close"][pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time()))]
-                    volume_tomorrow = yest_stock_dict["Volume"][pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time()))]
+
+                    open_ = yest_stock_dict["Open"].get(pd.Timestamp(datetime.combine(start_datetime, datetime.min.time())))
+                    close = yest_stock_dict["Close"].get(pd.Timestamp(datetime.combine(start_datetime, datetime.min.time())))
+                    volume = yest_stock_dict["Volume"].get(pd.Timestamp(datetime.combine(start_datetime, datetime.min.time())))
+
+                    if open_ is None:
+                        open_ = ten_days_list[len(ten_days_list) - 2][Open]
+                        close = ten_days_list[len(ten_days_list) - 2][Close]
+                        volume = ten_days_list[len(ten_days_list) - 2][Volume]
+
+
+
+                    
+                    open_yesterday = yest_stock_dict["Open"].get(pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time())))
+                    close_yesterday = yest_stock_dict["Close"].get(pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time())))
+                    volume_yesterday = yest_stock_dict["Volume"].get(pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time())))
+
+
+                    if open_yesterday is None:
+                        open_ = ten_days_list[len(ten_days_list) - 3][Open]
+                        close = ten_days_list[len(ten_days_list) - 3][Close]
+                        volume = ten_days_list[len(ten_days_list) - 3][Volume]
+
+
+
+
+                    open_tomorrow = yest_stock_dict["Open"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
+                    close_tomorrow = yest_stock_dict["Close"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
+                    volume_tomorrow = yest_stock_dict["Volume"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
+
+                    if open_tomorrow is None:
+                        open_tomorrow = ten_days_list[len(yest_stock_list)-1][Open]
+                        close_tomorrow = ten_days_list[len(yest_stock_list)-1][Close]
+                        volume_tomorrow = ten_days_list[len(yest_stock_list)-1][Volume]
+
 
                     open_ten_days = ten_days_list[0][Open]
                     close_ten_days = ten_days_list[0][Close]
                     volume_ten_days = ten_days_list[0][Volume]
 
-                    print(open_)
-                    print(close)
-                    print(volume)
+                    # print(open_)
+                    # print(close)
+                    # print(volume)
 
-                    print(open_yesterday)
-                    print(close_yesterday)
-                    print(volume_yesterday)
+                    # print(open_yesterday)
+                    # print(close_yesterday)
+                    # print(volume_yesterday)
 
-                    print(open_tomorrow)
-                    print(close_tomorrow)
-                    print(volume_tomorrow)
+                    # print(open_tomorrow)
+                    # print(close_tomorrow)
+                    # print(volume_tomorrow)
 
-                    print(open_ten_days)
-                    print(close_ten_days)
-                    print(volume_ten_days)
+                    # print(open_ten_days)
+                    # print(close_ten_days)
+                    # print(volume_ten_days)
+
+
+                    if close is None or close_ten_days is None or close_yesterday is None or open_ is None or open_ten_days is None or open_yesterday is None:
+                        print("WTF FOUND YOU")
+                        continue
 
 
                     close_ten_day_pct = get_percentage_change(close_ten_days,close)
@@ -239,15 +284,26 @@ def readContent(relPath):
                     open_one_day_pct = get_percentage_change(open_yesterday, open_)
                     vector_tfidfvectorizer = tfidf_vectorizer_vectors[fileNum]
                     df = pd.DataFrame(vector_tfidfvectorizer.T.todense(), index=tfidf_vectorizer.get_feature_names(), columns=["tfidf"])
-                    df.sort_values(by=["tfidf"],ascending=False)
+                    df = df.sort_values(by=["tfidf"],ascending=False).head(10)
+                    # print(df.to_dict())
+
+                    post = {"stock_symbol":stock_symbol,"date":start_datetime, "sentiment":sentiment, "tf_idf":df.to_dict(), \
+                        "open":open_, "close":close, "volume":volume, "close_ten_day_pct":close_ten_day_pct, "open_ten_day_pct":open_ten_day_pct, \
+                            "close_one_day_pct":close_one_day_pct, "open_one_day_pct":open_one_day_pct, "open_tomorrow":open_tomorrow, "close_tomorrow":close_tomorrow, \
+                                "volume_tomorrow":volume_tomorrow, "summary":data, "link":lines[3][3:], "title":lines[0][3:]}
+
+                    collection.insert_one(post)
+                    print(post)
+
+
                     #print(df)
 
+    
 
+        # if count == 10:
+        #     break
 
-        if count == 30:
-            break
-
-        count += 1
+        # count += 1
         fileNum = fileNum + 1
         
 
@@ -255,4 +311,7 @@ files = os.listdir(path)
 count = 0
 for i in files:
     readContent(path + '/' + i)
-    break
+    # break
+    # if count == 100:
+    #     break
+    
