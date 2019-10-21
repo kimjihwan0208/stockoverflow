@@ -9,6 +9,10 @@ from ibm_watson.natural_language_understanding_v1 import Features, EntitiesOptio
 from pandas_datareader.data import get_data_yahoo as get_stock_data #stock symbol, start date, end date, interval = 'd'
 import pandas as pd
 import yfinance as yf
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tfidf_vectorizer=TfidfVectorizer(use_idf=True)
+
 yf.pdr_override()
 
 from pandas.tseries.holiday import USFederalHolidayCalendar
@@ -52,6 +56,24 @@ def readContent(relPath):
     if(relPath.find('.DS') > -1):
         return
     files = os.listdir(relPath)
+    articles = []
+    for file in files:
+        if(f.find('.tar') > -1 or f.find('.DS') > -1):
+            continue
+        pwf = open(relPath + '/' + f, 'r')
+        lines = pwf.readlines()
+        if(len(lines) < 7): #skip if the article is missing
+            continue
+        
+        article = ''
+        for line in lines[7:-1]:
+            article = article + str(line.replace('\n', ' '))
+        articles.append(article)
+        pwf.close()
+
+    tfidf_vectorizer_vectors=tfidf_vectorizer.fit_transform(articles) #what if it's empty?
+
+    fileNum = 0
     for f in files:
         if(f.find('.tar') > -1 or f.find('.DS') > -1):
             continue
@@ -191,10 +213,10 @@ def readContent(relPath):
 
                     close_one_day_pct = get_percentage_change(close_yesterday,close)
                     open_one_day_pct = get_percentage_change(open_yesterday, open_)
+                    tfidf = tfidf_vectorizer_vectors[fileNum]
 
 
-
-
+    fileNum = fileNum + 1
 
         if count == 30:
             break
