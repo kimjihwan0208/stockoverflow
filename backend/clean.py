@@ -69,28 +69,14 @@ def readContent(relPath):
             continue
         lines.append('\n')
         article = ''
-        # print("line 7")
-        # print(lines[7])
-        # print("line 8")
-        # print(lines[8])
-        # print("line 9")
-        # print(lines[9])
+        
         for line in lines[7:-1]:
             article = article + str(line.replace('\n', ' '))
     
         articles.append(article)
-    #     pwf.close()
-    # # print(articles)
-    # for article in articles:
-    #     print(article)
+
     tfidf_vectorizer_vectors=tfidf_vectorizer.fit_transform(articles) #what if it's empty?
-    #print(tfidf_vectorizer_vectors[0])
-    df = pd.DataFrame(tfidf_vectorizer_vectors[0].T.todense(), index=tfidf_vectorizer.get_feature_names(), columns=["tfidf"])
-    df.sort_values(by=["tfidf"],ascending=False)
-    # print(df)
-    print((df.sort_values(by='tfidf',ascending=False)).to_dict())
-    # print(articles)
-    '''
+    
 
     fileNum = 0
     for f in files:
@@ -235,7 +221,7 @@ def readContent(relPath):
                     vector_tfidfvectorizer = tfidf_vectorizer_vectors[fileNum]
                     df = pd.DataFrame(vector_tfidfvectorizer.T.todense(), index=tfidf_vectorizer.get_feature_names(), columns=["tfidf"])
                     df.sort_values(by=["tfidf"],ascending=False)
-                    print(df)
+                    #print(df)
 
 
 
@@ -244,7 +230,7 @@ def readContent(relPath):
 
         count += 1
         fileNum = fileNum + 1
-        '''
+        
 
 files = os.listdir(path)
 count = 0
