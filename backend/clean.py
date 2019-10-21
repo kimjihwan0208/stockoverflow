@@ -10,8 +10,11 @@ from pandas_datareader.data import get_data_yahoo as get_stock_data #stock symbo
 import pandas as pd
 import yfinance as yf
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction import stop_words
+import re
 
-tfidf_vectorizer=TfidfVectorizer(use_idf=True)
+
+tfidf_vectorizer=TfidfVectorizer(stop_words=stop_words.ENGLISH_STOP_WORDS, use_idf=True,token_pattern=r'(?u)\b[A-Za-z]+\b')
 
 yf.pdr_override()
 
@@ -64,14 +67,30 @@ def readContent(relPath):
         lines = pwf.readlines()
         if(len(lines) < 7): #skip if the article is missing
             continue
-        
+        lines.append('\n')
         article = ''
+        # print("line 7")
+        # print(lines[7])
+        # print("line 8")
+        # print(lines[8])
+        # print("line 9")
+        # print(lines[9])
         for line in lines[7:-1]:
             article = article + str(line.replace('\n', ' '))
+    
         articles.append(article)
-        pwf.close()
-
+    #     pwf.close()
+    # # print(articles)
+    # for article in articles:
+    #     print(article)
     tfidf_vectorizer_vectors=tfidf_vectorizer.fit_transform(articles) #what if it's empty?
+    #print(tfidf_vectorizer_vectors[0])
+    df = pd.DataFrame(tfidf_vectorizer_vectors[0].T.todense(), index=tfidf_vectorizer.get_feature_names(), columns=["tfidf"])
+    df.sort_values(by=["tfidf"],ascending=False)
+    # print(df)
+    print((df.sort_values(by='tfidf',ascending=False)).to_dict())
+    # print(articles)
+    '''
 
     fileNum = 0
     for f in files:
@@ -225,6 +244,7 @@ def readContent(relPath):
 
         count += 1
         fileNum = fileNum + 1
+        '''
 
 files = os.listdir(path)
 count = 0
