@@ -7,10 +7,12 @@ import News from './components/News/News';
 import logo from './assets/logo.svg';
 
 function App() {
-  const [dataPoints, setDataPoints] = useState({});
+  const [dataPoints, setDataPoints] = useState([]);
+  const [terms, setTerms] = useState([]);
 
-  const handleSearch = (points) => {
-    setDataPoints(points)
+  const handleSearchResponse = (dataPoints, terms) => {
+    setDataPoints(dataPoints);
+    setTerms(terms);
   }
   
   return (
@@ -18,7 +20,7 @@ function App() {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <img src={logo} alt="" className="App__logo"/>
-          <Search handleSearch={handleSearch}/>
+          <Search handleSearchResponse={handleSearchResponse}/>
         </div>
         <div className="row justify-content-center">
           <div className="col-8">
@@ -31,7 +33,7 @@ function App() {
             <div className="App__listTitle--container">
               <h1 className="App__listTitle">Impactful Terms</h1>
             </div>
-            <List />
+            <List terms={terms} />
           </div>
         </div>
         <div className="row justify-content-center">

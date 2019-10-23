@@ -55,7 +55,18 @@ function Graph(props) {
     <div className="graph__container">
       <div className="graph__innerContainer">
         <Line
-          data={props.dataPoints}
+          data={
+            {
+              datasets: [{
+                label: "price",
+                data: props.dataPoints,
+                backgroundColor:'#F4F8FE',
+                borderColor: '#4963EF',
+                pointRadius: 5,
+                pointHoverRadius: 6,
+              }]
+            }
+          }
           options={setOptions}
         />
       </div>
