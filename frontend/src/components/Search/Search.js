@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Search.css';
-import { Form, Input, Button, Icon, DatePicker, Select } from 'antd';
+import { Form, Button, Icon, DatePicker, Select } from 'antd';
 import { stockSymbols as mockStockSymbols } from '../../mocks/stockSymbols';
 import { BASE_URL } from '../../constants';
 
@@ -32,51 +32,20 @@ function Search(props) {
     })
     .then(resp => resp.json())
     .then(resp => {
+      const { Stocks, Terms } = resp;
+      const list = Stocks.map(item => ({ "t": item.time, "y": item.Value }));
 
-      let temp = {}
-      let dataSets = [];
-      let labels = [];
-      let dataset1 = {};
-      let dataset2 = {};
-      let stocksList = resp.Stocks;
-      let temp1 = [];
-      let temp2 = [];
-
-      for (let i = 0; i < stocksList.length; ++i){
-        labels.push(stocksList[i].time);
-        temp1.push(stocksList[i].Value);
-        temp2.push(resp.Open)
-      }
-
-      dataset1 = {
-        label: "Current Date",
-        data: temp1,
-        borderColor:'rgba(63, 63, 191, 0.6)',
-        fill: false
-      }
-
-      dataset2 = {
-        label: "Date",
-        data: temp2,
-        borderColor:'rgba(255, 35, 35, 0.6)',
-        fill: false
-      }
-
-      dataSets.push(dataset1);
-      dataSets.push(dataset2);
-      temp = {
-        labels: labels,
-        datasets: dataSets
-      }
-      props.handleSearch(temp)
+      props.handleSearchResponse(list, Terms);
       setIsLoading(false);
     })
-    .catch(err => console.log(err))
-
+    .catch(err => {
+      console.error(err);
+      setIsLoading(false);
+    });
   }
 
   const handleDateChange = (date, dateString) => {
-    console.log(dateString)
+    setIsSelectLoading(true);
 
     fetch(`${BASE_URL}/api/date-to-stocks`, {
         headers: {
@@ -91,18 +60,14 @@ function Search(props) {
       .then(resp => {
         setStockSymbols(resp.Stocks);
         setSelectDefaultValue(stockSymbols[0]);
+        setIsSelectLoading(false);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setIsSelectLoading(false)
+        console.error(err);
+      });
 
-    setDate(dateString)
-
-    // TODO: Fetch all the stock symbols for the selected date from the backend
-    // Use setStockSymbols to update the stockSymbols array
-    // setTimeout(() => {
-    //   setStockSymbols(mockStockSymbols);
-    //   setSelectDefaultValue(stockSymbols[0]);
-    //   setIsSelectLoading(false);
-    // }, 3000);
+    setDate(dateString);
   }
 
   const handleStockChange = (value) => {
