@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Search from './components/Search/Search';
 import Graph from './components/Graph/Graph';
@@ -7,19 +7,25 @@ import News from './components/News/News';
 import logo from './assets/logo.svg';
 
 function App() {
+  const [dataPoints, setDataPoints] = useState([]);
+
+  const handleSearch = (points) => {
+    setDataPoints(points)
+  }
+
   return (
     <div className="App">
       <div className="container-fluid">
         <div className="row justify-content-center">
           <img src={logo} alt="" className="App__logo"/>
-          <Search />
+          <Search handleSearch={handleSearch}/>
         </div>
         <div className="row justify-content-center">
           <div className="col-8">
             <div className="App__stockTitle--container">
               <h1 className="App__stockTitle">Stock Graph</h1>
             </div>
-            <Graph />
+            <Graph dataPoints={dataPoints}/>
           </div>
           <div className="col-3">
             <div className="App__listTitle--container">

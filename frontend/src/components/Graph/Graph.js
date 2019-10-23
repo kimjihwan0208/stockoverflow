@@ -1,34 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import './Graph.css';
 
-const datasets = {
-  datasets: [{
-    label: "test",
-    data: [
-    {
-      t: "6:30",
-      y: 12
-    },
-    {
-      t: "7:30",
-      y: 13
-    },
-    {
-      t: "8:30",
-      y: 24
-    },
-    {
-      t: "9:30",
-      y: 1
-    }
-  ],
-  backgroundColor:'#F4F8FE',
-  borderColor: '#4963EF',
-  pointRadius: 5,
-  pointHoverRadius: 6,
-  }]
-}
 
 const setOptions = {
   responsive: true,
@@ -48,14 +21,13 @@ const setOptions = {
           unit: 'hour',
           format: 'HH:mm',
           parser: 'HH:mm',
-          min: '6:30',
-          max: '13:00',
+          min: '9:30',
+          max: '15:30',
           displayFormats: { hour: 'HH:mm' }
         }
     }],
     yAxes: [{
       ticks: {
-        beginAtZero: true,
         fontFamily: "'Ubuntu', sans-serif"
       },
       gridLines: {
@@ -75,12 +47,25 @@ const setOptions = {
   }
 }
 
-function Graph() {
+function Graph(props) {
+  const [graphPoints, setGraphPoints] = useState([])
+
   return (
     <div className="graph__container">
       <div className="graph__innerContainer">
         <Line
-          data={datasets}
+          data={
+            {
+              datasets: [{
+              label: "test",
+              data: props.dataPoints,
+              backgroundColor:'#F4F8FE',
+              borderColor: '#4963EF',
+              pointRadius: 5,
+              pointHoverRadius: 6,
+              }]
+            }
+          }
           options={setOptions}
         />
       </div>
