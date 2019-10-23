@@ -49,14 +49,14 @@ function Search(props) {
       }
 
       dataset1 = {
-        label: "date",
+        label: "Current Date",
         data: temp1,
         borderColor:'rgba(63, 63, 191, 0.6)',
         fill: false
       }
 
       dataset2 = {
-        label: "Current Date",
+        label: "Date",
         data: temp2,
         borderColor:'rgba(255, 35, 35, 0.6)',
         fill: false
