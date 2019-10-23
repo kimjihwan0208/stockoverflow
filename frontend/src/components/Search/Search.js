@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Search.css';
 import { Form, Button, Icon, DatePicker, Select } from 'antd';
-import { stockSymbols as mockStockSymbols } from '../../mocks/stockSymbols';
 import { BASE_URL } from '../../constants';
 
 const { Item } = Form;
