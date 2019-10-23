@@ -5,6 +5,7 @@ import Graph from './components/Graph/Graph';
 import List from './components/List/List';
 import News from './components/News/News';
 import logo from './assets/logo.svg';
+import {Animated} from "react-animated-css";
 
 function App() {
   const [dataPoints, setDataPoints] = useState([]);
@@ -14,8 +15,9 @@ function App() {
     setDataPoints(dataPoints);
     setTerms(terms);
   }
-  
+
   return (
+  <Animated animationIn="fadeIn">
     <div className="App">
       <div className="container-fluid">
         <div className="row justify-content-center">
@@ -46,6 +48,7 @@ function App() {
         </div>
       </div>
     </div>
+  </Animated>
   );
 }
 
