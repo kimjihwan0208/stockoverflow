@@ -20,8 +20,7 @@ function Search(props) {
     e.preventDefault();
 
     setIsLoading(true);
-
-    fetch(`"${BASE_URL}/api/stockdata"`,{
+    fetch(`${BASE_URL}/api/stockdata`,{
       headers: {
         'Content-Type': 'application/json'
       },
@@ -33,19 +32,43 @@ function Search(props) {
     })
     .then(resp => resp.json())
     .then(resp => {
-      let temp = {};
-      let list = [];
+
+      let temp = {}
+      let dataSets = [];
+      let labels = [];
+      let dataset1 = {};
+      let dataset2 = {};
       let stocksList = resp.Stocks;
+      let temp1 = [];
+      let temp2 = [];
 
       for (let i = 0; i < stocksList.length; ++i){
-        temp = {
-          "t": stocksList[i].time,
-          "y": stocksList[i].Value
-        }
-        list.push(temp);
+        labels.push(stocksList[i].time);
+        temp1.push(stocksList[i].Value);
+        temp2.push(resp.Open)
       }
-      console.log(list)
-      props.handleSearch(list)
+
+      dataset1 = {
+        label: "date",
+        data: temp1,
+        borderColor:'rgba(63, 63, 191, 0.6)',
+        fill: false
+      }
+
+      dataset2 = {
+        label: "Current Date",
+        data: temp2,
+        borderColor:'rgba(255, 35, 35, 0.6)',
+        fill: false
+      }
+
+      dataSets.push(dataset1);
+      dataSets.push(dataset2);
+      temp = {
+        labels: labels,
+        datasets: dataSets
+      }
+      props.handleSearch(temp)
       setIsLoading(false);
     })
     .catch(err => console.log(err))
@@ -55,7 +78,7 @@ function Search(props) {
   const handleDateChange = (date, dateString) => {
     console.log(dateString)
 
-    fetch(`"${BASE_URL}/api/date-to-stocks"`, {
+    fetch(`${BASE_URL}/api/date-to-stocks`, {
         headers: {
           'Content-Type': 'application/json'
         },

@@ -50,22 +50,12 @@ const setOptions = {
 function Graph(props) {
   const [graphPoints, setGraphPoints] = useState([])
 
+  console.log(props.dataPoints)
   return (
     <div className="graph__container">
       <div className="graph__innerContainer">
         <Line
-          data={
-            {
-              datasets: [{
-              label: "test",
-              data: props.dataPoints,
-              backgroundColor:'#F4F8FE',
-              borderColor: '#4963EF',
-              pointRadius: 5,
-              pointHoverRadius: 6,
-              }]
-            }
-          }
+          data={props.dataPoints}
           options={setOptions}
         />
       </div>

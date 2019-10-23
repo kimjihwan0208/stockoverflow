@@ -7,12 +7,12 @@ import News from './components/News/News';
 import logo from './assets/logo.svg';
 
 function App() {
-  const [dataPoints, setDataPoints] = useState([]);
+  const [dataPoints, setDataPoints] = useState({});
 
   const handleSearch = (points) => {
     setDataPoints(points)
   }
-
+  
   return (
     <div className="App">
       <div className="container-fluid">
