@@ -14,7 +14,6 @@ function Search(props) {
   const [stockSymbols, setStockSymbols] = useState([]);
   const [selectedValue, setSelectedValue] = useState('');
 
-
   const handleSubmit = e => {
     e.preventDefault();
 
