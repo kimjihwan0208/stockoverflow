@@ -9,7 +9,7 @@ function News() {
       <div className="row justify-content-center">
         {newsData && newsData.map(article => {
           return (
-            <div className="col-3">
+            <div className="col-4">
               <Article {...article} />
             </div>
           )

@@ -1,4 +1,4 @@
-export const BASE_URL = "http://5770397b.ngrok.io";
+export const BASE_URL = "http://fa8f6936.ngrok.io";
 
 export const setOptions = {
   responsive: true,
@@ -42,4 +42,14 @@ export const setOptions = {
     },
     display: false,
   }
+}
+
+export const chooseSentimentTagColor = label => {
+  if (label === "positive") {
+    return "green";
+  } else if (label === "negative") {
+    return "red";
+  }
+
+  return "gold";
 }

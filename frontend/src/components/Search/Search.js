@@ -30,6 +30,7 @@ function Search(props) {
     })
     .then(resp => resp.json())
     .then(resp => {
+      console.log(resp);
       const { Stocks, Terms } = resp;
       const list = Stocks.map(item => ({ "t": item.time, "y": item.Value }));
 
