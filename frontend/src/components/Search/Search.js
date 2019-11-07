@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Search.css';
 import { Form, Button, Icon, DatePicker, Select } from 'antd';
 import { BASE_URL } from '../../constants';
+const moment = require('moment');
 
+const defaultDate = "11/13/2006";
 const { Item } = Form;
 const { Option } = Select;
 
@@ -14,6 +16,11 @@ function Search(props) {
   const [isSelectLoading, setIsSelectLoading] = useState(false);
   const [stockSymbols, setStockSymbols] = useState([]);
   const [selectedValue, setSelectedValue] = useState('');
+
+  useEffect(() => {
+    setDate(defaultDate);
+    handleDateChange(defaultDate, defaultDate)
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -31,11 +38,11 @@ function Search(props) {
     })
     .then(resp => resp.json())
     .then(resp => {
-      console.log(resp);
-      const { Stocks, Terms, Articles } = resp;
+      console.log(resp)
+      const { Stocks, Terms, Articles, Open, Close } = resp;
       const list = Stocks.map(item => ({ "t": item.time, "y": item.Value }));
-      console.log("Terms after search", Terms)
-      handleSearchResponse(list, Terms, Articles);
+
+      handleSearchResponse(list, Terms, Articles, Open, Close);
       setIsLoading(false);
     })
     .catch(err => {
@@ -84,6 +91,7 @@ function Search(props) {
                 onChange={handleDateChange}
                 format="MM/DD/YYYY"
                 style={{ width: 200 }}
+                defaultValue={moment("11/13/2006")}
               />
             </Item>
             <Item>

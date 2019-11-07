@@ -11,12 +11,16 @@ function App() {
   const [dataPoints, setDataPoints] = useState([]);
   const [terms, setTerms] = useState([]);
   const [articles, setArticles] = useState([]);
+  const [openingStock, setOpeningStock] = useState(null);
+  const [closingStock, setClosingStock] = useState(null);
 
-  const handleSearchResponse = (dataPoints, terms, articles) => {
+  const handleSearchResponse = (dataPoints, terms, articles, openingStock, closingStock) => {
     console.log("got terms")
     setDataPoints(dataPoints);
     setTerms(terms);
     setArticles(articles);
+    setOpeningStock(openingStock);
+    setClosingStock(closingStock);
   }
 
   return (
@@ -32,7 +36,7 @@ function App() {
             <div className="App__stockTitle--container">
               <h1 className="App__stockTitle">Stock Graph</h1>
             </div>
-            <Graph dataPoints={dataPoints}/>
+            <Graph dataPoints={dataPoints} openingStock={openingStock} closingStock={closingStock} />
           </div>
           <div className="col-3">
             <div className="App__listTitle--container">
