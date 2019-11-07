@@ -22,7 +22,6 @@ function App() {
     setOpeningStock(openingStock);
     setClosingStock(closingStock);
   }
-
   return (
   <Animated animationIn="fadeIn">
     <div className="App">

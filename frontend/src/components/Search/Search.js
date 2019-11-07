@@ -41,7 +41,6 @@ function Search(props) {
       console.log(resp)
       const { Stocks, Terms, Articles, Open, Close } = resp;
       const list = Stocks.map(item => ({ "t": item.time, "y": item.Value }));
-
       handleSearchResponse(list, Terms, Articles, Open, Close);
       setIsLoading(false);
     })
