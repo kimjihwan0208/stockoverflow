@@ -2,6 +2,7 @@
   text-align: center;
   background-color:rgb(242, 247, 255);
   height: 100vh;
+  margin: 0 auto;
 }
 
 .App__logo {
@@ -28,7 +29,7 @@
 .App__stockTitle, .App__listTitle, .App__newsTitle {
   font-family: "Ubuntu", sans-serif;
   text-align: left;
-  margin-left: 2%;
+  /* margin-left: 2%; */
   font-weight: bold;
   font-size: 200%;
   color: #404040;
@@ -36,4 +37,18 @@
 
 .App__newsTitle {
   margin-top: 2%;
+}
+
+.App__impactfulTerms--container {
+  background-color: white;
+  height: 50vh;
+  border-radius: 30px;
+  box-shadow: 0px 0px 35px rgba(69, 96, 136, 0.07);
+}
+
+.App__impactfulTerms--caption {
+  font-family: "Ubuntu", sans-serif;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 40%;
 }

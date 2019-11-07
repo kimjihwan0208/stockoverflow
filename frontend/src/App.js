@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Search from './components/Search/Search';
 import Graph from './components/Graph/Graph';
@@ -10,10 +10,17 @@ import {Animated} from "react-animated-css";
 function App() {
   const [dataPoints, setDataPoints] = useState([]);
   const [terms, setTerms] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [openingStock, setOpeningStock] = useState(null);
+  const [closingStock, setClosingStock] = useState(null);
 
-  const handleSearchResponse = (dataPoints, terms) => {
+  const handleSearchResponse = (dataPoints, terms, articles, openingStock, closingStock) => {
+    console.log("got terms")
     setDataPoints(dataPoints);
     setTerms(terms);
+    setArticles(articles);
+    setOpeningStock(openingStock);
+    setClosingStock(closingStock);
   }
 
   return (
@@ -29,7 +36,7 @@ function App() {
             <div className="App__stockTitle--container">
               <h1 className="App__stockTitle">Stock Graph</h1>
             </div>
-            <Graph dataPoints={dataPoints}/>
+            <Graph dataPoints={dataPoints} openingStock={openingStock} closingStock={closingStock} />
           </div>
           <div className="col-3">
             <div className="App__listTitle--container">
@@ -43,7 +50,7 @@ function App() {
             <div className="App__newsTitle--container">
               <h1 className="App__newsTitle">Relevant News</h1>
             </div>
-            <News />
+            <News articles={articles} />
           </div>
         </div>
       </div>
