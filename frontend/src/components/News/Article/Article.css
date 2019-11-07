@@ -1,5 +1,5 @@
 .article__container {
-  height: 20vh;
+  height: 18vh;
   background-color: white;
   border-radius: 30px;
   box-shadow: 0px 0px 35px rgba(69, 96, 136, 0.07);
@@ -10,9 +10,9 @@
 
 .article__title {
   font-family: "Ubuntu", sans-serif;
-  color: #4963EF;
+  color: #4a68eb;
   font-weight: bold;
-  font-size: 120%;
+  font-size: 125%;
   margin-left: 0%;
 }
 
@@ -27,10 +27,11 @@
 
 .article__timestamp {
   font-weight: bold;
+  margin-left: -5%;
 }
 
 .article__secondRow {
-  width: auto;
+  width: 95%;
   margin: 0 auto;
   margin-top: 4%;
   position: absolute;
@@ -38,8 +39,8 @@
 }
 
 .article__modal--title {
-  color: #4963EF;
-  font-size: 150%;
+  color: #4a68eb;
+  font-size: 200%;
   margin-bottom: 4%;
 }
 
@@ -49,9 +50,18 @@
 }
 
 .article__modal--sentiment, .article__modal--timestamp {
-  display: inline;
+  display: inline-block;
 }
 
 .article__modal--sentiment {
   margin-left: 2%;
+}
+
+.article__modal--highlight {
+  background-color: rgb(200, 208, 253);
+}
+
+.ant-modal-content {
+  border-radius: 30px;
+  padding: 16px;
 }

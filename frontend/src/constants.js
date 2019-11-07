@@ -1,4 +1,4 @@
-export const BASE_URL = "http://fa8f6936.ngrok.io";
+export const BASE_URL = "http://7c527cf7.ngrok.io";
 
 export const setOptions = {
   responsive: true,
@@ -14,7 +14,7 @@ export const setOptions = {
       },
       time:
         {
-          stepSize: 1,
+          stepSize: 0.5,
           unit: 'hour',
           format: 'HH:mm',
           parser: 'HH:mm',

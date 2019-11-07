@@ -1,8 +1,7 @@
 .list__container {
   background-color: white;
   height: 50vh;
-  margin-right: 5%;
-  padding-top: 16px;
+  padding-top: 20px;
   border-radius: 30px;
   box-shadow: 0px 0px 35px rgba(69, 96, 136, 0.07);
 }

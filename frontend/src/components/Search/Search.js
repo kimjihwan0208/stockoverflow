@@ -7,6 +7,7 @@ const { Item } = Form;
 const { Option } = Select;
 
 function Search(props) {
+  const { handleSearchResponse } = props;
   const [date, setDate] = useState('');
   const [selectDefaultValue, setSelectDefaultValue] = useState('Select a stock symbol');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,10 +32,10 @@ function Search(props) {
     .then(resp => resp.json())
     .then(resp => {
       console.log(resp);
-      const { Stocks, Terms } = resp;
+      const { Stocks, Terms, Articles } = resp;
       const list = Stocks.map(item => ({ "t": item.time, "y": item.Value }));
-
-      props.handleSearchResponse(list, Terms);
+      console.log("Terms after search", Terms)
+      handleSearchResponse(list, Terms, Articles);
       setIsLoading(false);
     })
     .catch(err => {

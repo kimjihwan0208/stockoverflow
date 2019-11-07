@@ -4,6 +4,8 @@ import { setOptions } from '../../constants';
 import './Graph.css';
 
 function Graph(props) {
+  const { dataPoints } = props;
+
   return (
     <div className="graph__container">
       <div className="graph__innerContainer">
@@ -12,7 +14,7 @@ function Graph(props) {
             {
               datasets: [{
                 label: "price",
-                data: props.dataPoints,
+                data: dataPoints,
                 backgroundColor:'#F4F8FE',
                 borderColor: '#4963EF',
                 pointRadius: 5,

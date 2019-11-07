@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Search from './components/Search/Search';
 import Graph from './components/Graph/Graph';
@@ -10,10 +10,13 @@ import {Animated} from "react-animated-css";
 function App() {
   const [dataPoints, setDataPoints] = useState([]);
   const [terms, setTerms] = useState([]);
+  const [articles, setArticles] = useState([]);
 
-  const handleSearchResponse = (dataPoints, terms) => {
+  const handleSearchResponse = (dataPoints, terms, articles) => {
+    console.log("got terms")
     setDataPoints(dataPoints);
     setTerms(terms);
+    setArticles(articles);
   }
 
   return (
@@ -43,7 +46,7 @@ function App() {
             <div className="App__newsTitle--container">
               <h1 className="App__newsTitle">Relevant News</h1>
             </div>
-            <News />
+            <News articles={articles} />
           </div>
         </div>
       </div>
