@@ -2,8 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-baseurl = 'http://www.reuters.com/news/archive/worldNews?view=page='
-valid_pages = 'abcdefghijlmnoprstuvw'
+baseurl = 'https://www.reuters.com/finance/markets?view=page='
 total_urls = []
 for n in range(1,10):
     total_urls.append(baseurl + format(n))
