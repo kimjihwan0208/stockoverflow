@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Search.css';
 import { Form, Button, Icon, DatePicker, Select } from 'antd';
-import { BASE_URL } from '../../constants';
+import { BASE_URL, showMessage, defaultDate, SEARCH_ERROR } from '../../constants';
 const moment = require('moment');
 
-const defaultDate = "11/13/2006";
 const { Item } = Form;
 const { Option } = Select;
 
@@ -19,7 +18,7 @@ function Search(props) {
 
   useEffect(() => {
     setDate(defaultDate);
-    handleDateChange(defaultDate, defaultDate)
+    handleDateChange(defaultDate, defaultDate);
   }, []);
 
   const handleSubmit = e => {
@@ -47,6 +46,7 @@ function Search(props) {
     .catch(err => {
       console.error(err);
       setIsLoading(false);
+      showMessage(SEARCH_ERROR);
     });
   }
 
@@ -69,8 +69,9 @@ function Search(props) {
         setIsSelectLoading(false);
       })
       .catch(err => {
-        setIsSelectLoading(false)
+        setIsSelectLoading(false);
         console.error(err);
+        showMessage(SEARCH_ERROR);
       });
 
     setDate(dateString);

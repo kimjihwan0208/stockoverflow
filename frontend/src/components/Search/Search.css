@@ -24,3 +24,7 @@
 .search__submit:hover {
   box-shadow: 0px 0px 10px #4963EF;
 }
+
+.anticon {
+  vertical-align: 0em;
+}
