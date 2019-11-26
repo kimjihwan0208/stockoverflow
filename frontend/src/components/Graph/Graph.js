@@ -14,24 +14,25 @@ function Graph(props) {
 
     const dataSet = {
       labels: time,
-      datasets: [{
-        label: "Current Price",
-        data: currentPrice,
-        backgroundColor:'#F4F8FE',
-        borderColor: '#4963EF',
-      },
-      {
-        label: "Opening",
-        fill: false,
-        data: opening,
-        backgroundColor: 'rgba(255, 35, 35, 0.6)'
-      },
-      {
-        label: "Closing",
-        fill: false,
-        data: closing,
-        backgroundColor: 'rgba(255, 35, 35, 0.6)'
-      }
+      datasets: [
+        {
+          label: "Opening",
+          fill: false,
+          data: opening,
+          backgroundColor: 'rgba(255, 35, 35, 0.6)'
+        },
+        {
+          label: "Closing",
+          fill: false,
+          data: closing,
+          backgroundColor: 'rgba(255, 35, 35, 0.6)'
+        },
+        {
+          label: "Current Price",
+          data: currentPrice,
+          backgroundColor:'#F4F8FE',
+          borderColor: '#4963EF',
+        }
       ]
     }
 

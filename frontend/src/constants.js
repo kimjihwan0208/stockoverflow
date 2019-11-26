@@ -1,6 +1,6 @@
 import { message } from "antd";
 
-export const BASE_URL = "http://7c527cf7.ngrok.io";
+export const BASE_URL = "http://47049154.ngrok.io";
 export const defaultDate = "11/13/2006";
 export const SEARCH_ERROR = "There was an issue when fetching information for your stock symbol."
 export const setOptions = {
