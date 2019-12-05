@@ -34,11 +34,11 @@ def get_percentage_change(previous_number:float, current_number:float) -> float:
         return float('inf')
 
 High = 0
-Low = 1       
-Open = 2     
-Close = 3  
-Volume = 4  
-Adj = 5 
+Low = 1
+Open = 2
+Close = 3
+Volume = 4
+Adj = 5
 Adj_Close = 6
 pkl_filename = 'logisticRegressionModel.pickle'
 with open(pkl_filename, 'rb') as file:
@@ -55,7 +55,7 @@ def get_symbol(symbol):
             return x['name']
 @app.route("/api/date-to-stocks", methods=['GET', 'POST'])
 def main():
-	
+
 	if request.method == 'POST':
 
 		dateOne = request.json.get('date') # convert this to datetime object with strftime
@@ -96,7 +96,7 @@ def main():
 		# c= []
 		# for i in a:
 		# 	c.append(i["stock_symbol"])
-		
+
 		# return {"Stocks":c}
 
 
@@ -108,7 +108,7 @@ def stocks():
 	if request.method == 'POST':
 
 		dateOne = request.json.get('date')
-		
+
 
 		if dateOne is None:
 			return {"Message":"No date was provided"}
@@ -132,10 +132,10 @@ def stocks():
 		except KeyError:
 			return {"Message":"There is something seriously wrong here. Stock data was stored for this exact date in the DB but is now not available"}
 
-	
 
 
-		
+
+
 		stock_data = stock_data.to_dict()
 
 		open_ = stock_data.get("Open").get(pd.Timestamp(datetime.combine(date_, datetime.min.time())))
@@ -145,7 +145,7 @@ def stocks():
 		NSMax = datetime.combine(date_, datetime.max.time())
 
 
-		
+
 		ts = TimeSeries(key='LC3BDD962B0ZBR5S', output_format='pandas')
 		data, meta_data = ts.get_intraday(symbol=stock_symbol,interval='60min', outputsize='full')
 		data = data.to_dict()
@@ -157,12 +157,12 @@ def stocks():
 			"stock_symbol": stock_symbol,
 			"date":{"$gte": NSM,
 					"$lt": NSMax}})
-		
+
 		'''
 # 		q = es.search(index='stocks', body= \
 
 # 		{ \
-#   			"query": {  
+#   			"query": {
 #     			"bool": { \
 #       "must": [ \
 #         { \
@@ -174,14 +174,14 @@ def stocks():
 #           "range": { \
 #             "date": { \
 #               "gte": date_zeroed, \
-#               "lte": date_oned 
+#               "lte": date_oned
 #             } \
 #           } \
 #         } \
 #       ] \
 #     } \
 #   } \
-# } 
+# }
 # 		)
 		q = es.search(index='stocks', body={"query": {"range":\
 			{"date" : { "gte" : date_zeroed, "lte" : date_oned}}}})
@@ -195,7 +195,7 @@ def stocks():
 					 "gte" : date_zeroed, "lte" : date_oned \
 					 } \
 					 }}, \
-			{"match": { "stock_symbol":stock_symbol } }}}) 
+			{"match": { "stock_symbol":stock_symbol } }}})
 			'''
 
 
@@ -211,11 +211,11 @@ def stocks():
 				print(b)
 
 		# print(b['tf_idf'])
-		
+
 		results = b
-		
+		results = list({v['link']:v for v in results}.values())
 		stock_data_list = []
-		
+
 		date_ = datetime.combine(datetime.now(), datetime.min.time())
 		date_ -= timedelta(days=1)
 
@@ -226,16 +226,17 @@ def stocks():
 
 
 		for i in range(0,7):
-			
+
 			a = { "Value":(data.get("1. open").get(pd.Timestamp(datetime.combine(date_, T(hour=(9 + i), minute=30))))), \
 					"time": str(9 + i)+":" + "30" }
 			stock_data_list.append(a)
 
-		
 
-		
+
+
 
 		termz = []
+		print(results[0])
 		for key in results[0]['tf_idf']['tfidf']:
 			t = {key:results[0]['tf_idf']['tfidf'][key]}
 			print(t)
@@ -251,10 +252,10 @@ def stocks():
 				terms.append(key)
 
 			a['terms'] = terms
-			Articles.append(a)	
+			Articles.append(a)
 
 
-		start_datetime = deepcopy(date_)	
+		start_datetime = deepcopy(date_)
 		while start_datetime.weekday() == saturday or start_datetime.weekday() == sunday  or  datetime.combine(start_datetime, datetime.min.time()) in holidays:
 			start_datetime -= timedelta(days=1)
 
@@ -288,7 +289,7 @@ def stocks():
 			yest_stock_list = yesterday_stock_data.values.tolist()
 			ten_days_list = ten_days_stock_data.values.tolist()
 
-			# if company["text"] == "Hulu": 
+			# if company["text"] == "Hulu":
 			# 	print(company["text"])
 			# 	print(yest_stock_dict)
 			# 	print(yest_stock_list)
@@ -309,7 +310,7 @@ def stocks():
 
 
 
-			
+
 			open_yesterday = yest_stock_dict["Open"].get(pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time())))
 			close_yesterday = yest_stock_dict["Close"].get(pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time())))
 			volume_yesterday = yest_stock_dict["Volume"].get(pd.Timestamp(datetime.combine(yesterday_datetime, datetime.min.time())))
@@ -323,16 +324,18 @@ def stocks():
 
 
 
-			open_tomorrow = yest_stock_dict["Open"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
-			close_tomorrow = yest_stock_dict["Close"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
-			volume_tomorrow = yest_stock_dict["Volume"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
+			# open_tomorrow = yest_stock_dict["Open"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
+			# close_tomorrow = yest_stock_dict["Close"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
+			# volume_tomorrow = yest_stock_dict["Volume"].get(pd.Timestamp(datetime.combine(tomorrow_datetime, datetime.min.time())))
 
-			if open_tomorrow is None:
-				open_tomorrow = ten_days_list[len(yest_stock_list)-1][Open]
-				close_tomorrow = ten_days_list[len(yest_stock_list)-1][Close]
-				volume_tomorrow = ten_days_list[len(yest_stock_list)-1][Volume]
+			# if open_tomorrow is None:
+			# 	open_tomorrow = ten_days_list[len(yest_stock_list)-1][Open]
+			# 	close_tomorrow = ten_days_list[len(yest_stock_list)-1][Close]
+			# 	volume_tomorrow = ten_days_list[len(yest_stock_list)-1][Volume]
 
-
+			open_tomorrow = 0
+			close_tomorrow = 0
+			volume_tomorrow = 0
 			open_ten_days = ten_days_list[0][Open]
 			close_ten_days = ten_days_list[0][Close]
 			volume_ten_days = ten_days_list[0][Volume]
@@ -356,7 +359,7 @@ def stocks():
 
 			if close is None or close_ten_days is None or close_yesterday is None or open_ is None or open_ten_days is None or open_yesterday is None:
 				print("WTF FOUND YOU")
-				
+
 
 
 			close_ten_day_pct = get_percentage_change(close_ten_days,close)
@@ -373,7 +376,7 @@ def stocks():
 			input_ = {'close_ten_day_pct': close_ten_day_pct, 'open_ten_day_pct': open_ten_day_pct, 'close_one_day_pct': close_one_day_pct, \
 				'open_one_day_pct': open_one_day_pct, 'score': sentiment }
 
-			
+
 			df = pd.DataFrame(input_, index=[0])
 			print(df)
 
@@ -390,12 +393,12 @@ def stocks():
 				sentence = "Bummer. It looks like the stock price might go down. Do you know what short selling is?"
 
 		return {"Stocks":stock_data_list, "Open":open_, "Close":close, "Articles":Articles, "Terms":termz, "vals":vals, "company_name":company, "prediction":UD, "predictionMessage":sentence}
-		
+
 		#return {"Hello":"ES did not CONK"}
 
-	return {"Message":"You did not send a post chief"}		
+	return {"Message":"You did not send a post chief"}
 		# There are three scenarios
-		#1. The date is in the last 6 days. In this case, the data can be obtained from 
+		#1. The date is in the last 6 days. In this case, the data can be obtained from
 
 
 
@@ -404,5 +407,3 @@ def stocks():
 
 if __name__ == "__main__":
 	app.run(debug=True)
-
-
