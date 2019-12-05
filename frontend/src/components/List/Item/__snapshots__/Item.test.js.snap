@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item renders 1`] = `
+<body>
+  <div>
+    <div
+      class="item__container"
+      style="background-color: rgba(73, 99, 239, 0.9);"
+    >
+      <div
+        class="item__value"
+      >
+        word
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -5,7 +5,11 @@ import Graph from './components/Graph/Graph';
 import List from './components/List/List';
 import News from './components/News/News';
 import logo from './assets/logo.svg';
-import {Animated} from "react-animated-css";
+import { Animated } from "react-animated-css";
+import { Modal } from 'antd';
+import upArrow from './assets/up-arrow.svg';
+import downArrow from './assets/down-arrow.svg';
+import Bounce from 'react-reveal/Bounce';
 
 function App() {
   const [dataPoints, setDataPoints] = useState([]);
@@ -13,15 +17,31 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [openingStock, setOpeningStock] = useState(null);
   const [closingStock, setClosingStock] = useState(null);
+  const [companyName, setCompanyName] = useState("");
+  const [prediction, setPrediction] = useState("");
+  const [predictionMessage, setPredictionMessage] = useState("");
+  const [stockSymbol, setStockSymbol] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSearchResponse = (dataPoints, terms, articles, openingStock, closingStock) => {
-    console.log("got terms")
+  const handleSearchResponse = data => {
+    const { dataPoints, terms, articles, openingStock, closingStock, companyName, prediction, predictionMessage, stockSymbol } = data;
     setDataPoints(dataPoints);
     setTerms(terms);
     setArticles(articles);
     setOpeningStock(openingStock);
     setClosingStock(closingStock);
+    setCompanyName(companyName);
+    setPrediction(prediction);
+    setPredictionMessage(predictionMessage);
+    setStockSymbol(stockSymbol);
+
+    if (companyName && prediction && predictionMessage && stockSymbol) {
+      setIsModalOpen(true);
+    }
   }
+
+  const handleCloseModal = () => setIsModalOpen(false);
+
   return (
   <Animated animationIn="fadeIn">
     <div className="App">
@@ -52,6 +72,27 @@ function App() {
             <News articles={articles} />
           </div>
         </div>
+        <Modal
+          visible={isModalOpen}
+          onCancel={handleCloseModal}
+          footer={null}
+          centered
+        >
+          <Bounce>
+            <div className="App__arrow--wrapper">
+              <div className="App__stockSymbol">
+                {stockSymbol}
+                {prediction === "up" ? (
+                  <img src={upArrow} alt="" className="App__arrow" />
+                ) : (
+                  <img src={downArrow} alt="" className="App__arrow" />
+                )}
+              </div>
+            </div>
+            <div className="App__companyName">{companyName}</div>
+          </Bounce>
+          <div className="App__predictionMessage">{predictionMessage}</div>
+        </Modal>
       </div>
     </div>
   </Animated>

@@ -52,3 +52,27 @@
   margin: 0 auto;
   padding-top: 40%;
 }
+
+.App__arrow--wrapper {
+  text-align: center;
+}
+
+.App__arrow {
+  width: 6%;
+  margin-top: -3px;
+  margin-left: 8px;
+}
+
+.App__stockSymbol {
+  display: inline;
+  font-size: 225%;
+  font-weight: bold;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.App__companyName {
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 6%;
+}

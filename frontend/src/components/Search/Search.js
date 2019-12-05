@@ -38,9 +38,20 @@ function Search(props) {
     .then(resp => resp.json())
     .then(resp => {
       console.log(resp)
-      const { Stocks, Terms, Articles, Open, Close } = resp;
-      const list = Stocks.map(item => ({ "t": item.time, "y": item.Value }));
-      handleSearchResponse(list, Terms, Articles, Open, Close);
+      const {
+        Articles: articles,
+        Close: closingStock,
+        Open: openingStock,
+        Stocks: stocks,
+        Terms: terms,
+        company_name: companyName,
+        prediction,
+        predictionMessage
+      } = resp;
+
+      const dataPoints = stocks.map(item => ({ "t": item.time, "y": item.Value }));
+      const data = { dataPoints, articles, closingStock, openingStock, terms, companyName, prediction, predictionMessage, stockSymbol: selectedValue };
+      handleSearchResponse(data);
       setIsLoading(false);
     })
     .catch(err => {
