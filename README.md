@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a name="logo"><img src="hhttps://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg" width="200"></a>
+  <a name="logo"><img src="https://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg" width="200"></a>
   <br>
   Stock Overflow
 </h1>
