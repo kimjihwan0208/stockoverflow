@@ -3,11 +3,11 @@
 Team Members: Aditya Acharya, Eric Ong, Ji Hwan Kim, John Shin, Neal Goyal
 
 ## Table of Contents
-[Overview](##Overview)
-[Usage](##Usage)
-[Instructions](##Instructions)
-[Diagrams](##Diagrams)
-[Dependencies](##Dependencies)
+- [Overview](#overview)
+- [Usage](#usage)
+- [How To Run](#how-to-run)
+- [Diagrams](#diagrams)
+- [Dependencies](#dependencies)
 
 ## Overview
 Welcome to Stock Overflow. Stock Overflow is a full-stack web application that uses news data to predict changes in stock prices. Not only does it show the prediction, but it also retrieves the news articles that are most relevant to that stock and provides the most impactful keywords associated to the price of the stock of the day.
@@ -32,7 +32,7 @@ Four Types of Users: Active Investors, Passive Investors, Speculators, Stock Ana
 ## Usage
 
 
-## Instructions
+## How To Run
 In the project directory, you can run:
 
 ### `npm start`
@@ -81,5 +81,4 @@ Overall System Diagram
 
 
 ## Dependencies
-Only need to install Node Package Manager (npm). See below for more information
-- [Documentation For Installing `npm`](https://www.npmjs.com/get-npm)
+Install Node Package Manager (npm). [Helpful Documentation](https://www.npmjs.com/get-npm)
