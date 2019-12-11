@@ -20,13 +20,10 @@ User Actions:
 
 Four Types of Users: Active Investors, Passive Investors, Speculators, Stock Analysts. 
 
-1. As an active investor, I want to be able to read relevant articles affecting the current stock price, so that I can make well-researched investment decisions and view stock performance. 
-
-2. As a passive investor, I want to view historical data on stocks in a chart, so that I can make low-risk, calculated investments. 
-
-3. As a speculator, I want to see relevant terms affecting stocks, so that I can make quick buy/sell investment decisions.
-
-4. As a stock analyst, I want to view daily trends on stocks, so that I can make accurate investments for my clients.
+1. As an **active investor**, I want to be able to read relevant articles affecting the current stock price, so that I can make well-researched investment decisions and view stock performance. 
+2. As a **passive investor**, I want to view historical data on stocks in a chart, so that I can make low-risk, calculated investments. 
+3. As a **speculator**, I want to see relevant terms affecting stocks, so that I can make quick buy/sell investment decisions.
+4. As a **stock analyst**, I want to view daily trends on stocks, so that I can make accurate investments for my clients.
 
 
 ## Usage
