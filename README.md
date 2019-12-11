@@ -1,10 +1,8 @@
 <h1 align="center">
   <a name="logo"><img src="https://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg" width="400"></a>
   <br>
-  Stock Overflow
+  KirbyUpB
 </h1>
-
-By: KirbyUpB
 
 Team Members: Aditya Acharya, Eric Ong, Ji Hwan Kim, John Shin, Neal Goyal
 
