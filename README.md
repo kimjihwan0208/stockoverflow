@@ -1,7 +1,6 @@
 # Stock Overflow
 ![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg)
-
-## By: KirbyUpB
+By: KirbyUpB
 Team Members: Aditya Acharya, Eric Ong, Ji Hwan Kim, John Shin, Neal Goyal
 
 ## Table of Contents
@@ -29,7 +28,7 @@ Four Types of Users: Active Investors, Passive Investors, Speculators, Stock Ana
 
 
 ## Usage
-
+![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/backend/Screen%20Shot%202019-12-11%20at%202.49.15%20AM.png)
 
 ## How To Run
 In the project directory, you can run:
