@@ -2,6 +2,7 @@
 ![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg)
 
 By: KirbyUpB
+
 Team Members: Aditya Acharya, Eric Ong, Ji Hwan Kim, John Shin, Neal Goyal
 
 ## Table of Contents
