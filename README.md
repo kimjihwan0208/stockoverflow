@@ -3,19 +3,36 @@
 Team Members: Aditya Acharya, Eric Ong, Ji Hwan Kim, John Shin, Neal Goyal
 
 ## Table of Contents
-[Overview](## Overview)
-[Usage](## Usage)
-[How To Run](## Overview)
-[Flow Diagrams](## Overview)
-[Dependencies](## Overview)
+[Overview](##Overview)
+[Usage](##Usage)
+[Instructions](##Instructions)
+[Diagrams](##Diagrams)
+[Dependencies](##Dependencies)
 
 ## Overview
 Welcome to Stock Overflow. Stock Overflow is a full-stack web application that uses news data to predict changes in stock prices. Not only does it show the prediction, but it also retrieves the news articles that are most relevant to that stock and provides the most impactful keywords associated to the price of the stock of the day.
 
-## Usage (screenshots)
+User Actions: 
+- Entering Stock Info
+- Search
+- Resizing stock chart
+- Clicking article
+
+Four Types of Users: Active Investors, Passive Investors, Speculators, Stock Analysts. 
+
+1. As an active investor, I want to be able to read relevant articles affecting the current stock price, so that I can make well-researched investment decisions and view stock performance. 
+
+2. As a passive investor, I want to view historical data on stocks in a chart, so that I can make low-risk, calculated investments. 
+
+3. As a speculator, I want to see relevant terms affecting stocks, so that I can make quick buy/sell investment decisions.
+
+4. As a stock analyst, I want to view daily trends on stocks, so that I can make accurate investments for my clients.
 
 
-## How To Run
+## Usage
+
+
+## Instructions
 In the project directory, you can run:
 
 ### `npm start`
@@ -51,8 +68,16 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Flow Diagrams
+## Diagrams
+
+Sequence Diagram
 ![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/backend/Screen%20Shot%202019-12-11%20at%202.32.12%20AM.png)
+
+Frontend Structure
+![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/backend/Screen%20Shot%202019-12-11%20at%202.32.25%20AM.png)
+
+Overall System Diagram
+![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/backend/Screen%20Shot%202019-12-11%20at%202.33.55%20AM.png)
 
 
 ## Dependencies
