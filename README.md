@@ -1,8 +1,9 @@
 <h1 align="center">
-  <a name="logo" href="https://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg"><img src="hhttps://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg" alt="Stock Overflow" width="200"></a>
+  <a name="logo"><img src="hhttps://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg" width="200"></a>
   <br>
   Stock Overflow
 </h1>
+
 # Stock Overflow
 ![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/frontend/src/assets/logo.svg)
 
