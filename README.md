@@ -52,7 +52,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Flow Diagrams
-
+![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/backend/Screen%20Shot%202019-12-11%20at%202.32.12%20AM.png)
 
 
 ## Dependencies
