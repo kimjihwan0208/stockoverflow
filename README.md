@@ -31,6 +31,8 @@ Four Types of Users: Active Investors, Passive Investors, Speculators, Stock Ana
 
 
 ## Usage
+Demo: https://www.youtube.com/watch?v=YMJh-efLch4
+
 ![Image](https://github.com/CS-UCR/final-project-stockoverflow/blob/master/backend/Screen%20Shot%202019-12-11%20at%202.49.15%20AM.png)
 
 ## How To Run
