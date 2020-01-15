@@ -15,7 +15,7 @@ summary = []
 timestamp = []
 f = open('soup.txt','w')
 g = open('article.txt','w')
-cluster = MongoClient("mongodb+srv://adiach1:1234@cluster0-jgwg7.mongodb.net/scraped_data?retryWrites=true&w=majority")
+cluster = MongoClient()
 
 db = cluster["scraped_data"]
 collection = db["data"]

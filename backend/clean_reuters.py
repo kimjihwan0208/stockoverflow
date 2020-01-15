@@ -30,12 +30,12 @@ residual = returnsClosePrevRaw1 - mkt_portion
 residual is returnsPrevCloseMktres
 '''
 
-cluster = MongoClient("mongodb+srv://adiach1:1234@cluster0-jgwg7.mongodb.net/test?retryWrites=true&w=majority")
+cluster = MongoClient()
 
 db = cluster["test"]
 collection = db["scraped_cleaned_docs"]
 
-second_cluster = MongoClient("mongodb+srv://adiach1:1234@cluster0-jgwg7.mongodb.net/scrapped_data?retryWrites=true&w=majority")
+second_cluster = MongoClient()
 
 second_db = second_cluster['scraped_data']
 second_collection = second_db['data']
@@ -50,7 +50,7 @@ holidays = cal.holidays(start='2006-01-01', end='2015-12-31').to_pydatetime().to
 saturday = 5
 sunday = 6
 
-authenticator = IAMAuthenticator('mfRzJlP1VP1P6iZaQ9iZ1iI74rHWx-A9ekAmBBtV_UQ5')
+authenticator = IAMAuthenticator()
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version='2019-07-12',
     authenticator=authenticator)

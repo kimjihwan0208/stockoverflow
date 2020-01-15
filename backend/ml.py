@@ -14,7 +14,7 @@ import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 
-client = MongoClient("mongodb+srv://adiach1:1234@cluster0-jgwg7.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient()
 
 collection = client['test']['new_docs']
 

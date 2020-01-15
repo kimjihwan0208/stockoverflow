@@ -19,9 +19,9 @@ yf.pdr_override()
 app = Flask(__name__)
 CORS(app)
 from elasticsearch import Elasticsearch
-es = Elasticsearch('https://ektda2wx9w:a2f28dfrin@stock-data-4002685217.us-west-2.bonsaisearch.net:443')
+es = Elasticsearch()
 
-cluster = MongoClient("mongodb+srv://adiach1:1234@cluster0-jgwg7.mongodb.net/test?retryWrites=true&w=majority")
+cluster = MongoClient()
 
 db = cluster["test"]
 collection = db["test"]
